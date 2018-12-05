@@ -8,10 +8,10 @@ RUN gem install rails
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY build.sh /usr/bin/build-rails
-RUN chmod +x /usr/bin/build-rails
-
 RUN rails new . --force
 
 ONBUILD RUN bundle install
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+
+VOLUME /app/public/assets
+
+CMD bundle exec rails db:migrate && bundle exec puma -C config/puma.rb
