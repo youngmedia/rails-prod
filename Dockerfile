@@ -12,6 +12,8 @@ RUN rails new . --force
 
 ONBUILD RUN bundle install
 
-VOLUME /app/public/assets
+VOLUME /app/public/assets/
+
+EXPOSE 3000
 
 CMD bundle exec rails db:migrate && bundle exec puma -C config/puma.rb
